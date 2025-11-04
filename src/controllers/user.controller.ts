@@ -24,10 +24,9 @@ export class UserController {
   try {
     const loginData = req.body;
 
-    const user = await userService.loginUser(loginData);
+    const loginResult = await userService.loginUser(loginData);
 
-    const { contrase_a, ...userData } = user;
-    res.status(200).json({ message: "Login exitoso", user: userData });
+    res.status(200).json(loginResult); 
 
   } catch (error: any) {
     res.status(401).json({ message: "Credenciales inválidas", error: error.message });

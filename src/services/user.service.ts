@@ -1,5 +1,6 @@
 import { UserRepository } from '../repositories/user.repository.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const userRepository = new UserRepository();
 
@@ -31,20 +32,45 @@ export class UserService {
   }
 
   async loginUser(loginData: any) {
+
     const user = await userRepository.findUserByEmail(loginData.email);
     if (!user) {
-        throw new Error('Email o contraseña incorrectos');
+      throw new Error('Email o contraseña incorrectos');
     }
 
     const isPasswordValid = await bcrypt.compare(
-        loginData.contraseña, 
-        user.contrase_a
+      loginData.contraseña,
+      user.contrase_a
     );
 
     if (!isPasswordValid) {
-        throw new Error('Email o contraseña incorrectos');
+      throw new Error('Email o contraseña incorrectos');
     }
 
-    return user;
+    
+    try {
+        if (!process.env.JWT_SECRET) {
+          throw new Error('La clave secreta JWT no está definida en .env');
+        }
+   
+        const payload = { 
+          id: user.id, 
+          email: user.email,
+          nombre: user.nombre
+        };
+      
+        const token = jwt.sign(
+          payload, 
+          process.env.JWT_SECRET, 
+          { expiresIn: '8h' } 
+        );
+ 
+        const { contrase_a, ...userData } = user;
+        return { token, user: userData };
+      
+      } catch (error) {
+        console.error("Error al firmar el token:", error);
+        throw new Error('Error interno al generar la sesión');
+      }
   }
 }
