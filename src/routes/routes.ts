@@ -3,6 +3,8 @@ import gameRouter from "./game-router/game.routes.js";
 import authRouter from "./auth-router/auth.routes.js";
 import plataformaRouter from "./plataforma-router/plataforma.routes.js";
 import generoRouter from "./genero-router/genero-routes.js";
+import carritoRoutes from './carrito-router/carrito.routes.js';
+
 
 export class AppRoutes {
 
@@ -14,6 +16,7 @@ export class AppRoutes {
         router.use('/api/auth', authRouter);
         router.use('/api/plataforma', plataformaRouter)
         router.use('/api/genero', generoRouter);
+        router.use('/api/carrito', carritoRoutes);
 
         return router;
     }
