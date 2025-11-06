@@ -16,4 +16,8 @@ export class GameService {
 
     }
 
+    async getSimilarGames(generos: string[], excludeId: number) {
+    return await this.gameRepository.findSimilarGames(generos, excludeId);
+}
+
 }
