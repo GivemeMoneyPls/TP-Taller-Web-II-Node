@@ -25,4 +25,19 @@ export class CarritoRepository {
       },
     });
   }
+  async getCarritoByUsuario(usuarioId: number) {
+    return await prisma.usuario_juego.findMany({
+      where: { usuario_id: usuarioId },
+      include: {
+        juego: {
+          include: {
+            plataforma: true,
+            juego_genero: {
+              include: { genero: true }
+            }
+          }
+        }
+      }
+    });
+  }
 }

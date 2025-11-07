@@ -5,5 +5,5 @@ const carritoRouter = Router();
 const carritoController = new CarritoController();
 
 carritoRouter.post('/agregar', carritoController.agregarAlCarrito);
-
+carritoRouter.get('/:usuarioId', carritoController.obtenerCarrito);
 export default carritoRouter;

@@ -13,4 +13,8 @@ export class CarritoService {
 
     return await carritoRepository.createItem(usuarioId, juegoId);
   }
+  async obtenerCarrito(usuarioId: number) {
+    const carrito = await carritoRepository.getCarritoByUsuario(usuarioId);
+    return carrito;
+  }
 }
