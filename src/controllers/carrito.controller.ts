@@ -51,4 +51,26 @@ export class CarritoController {
       });
     }
   }
+  async eliminarDelCarrito(req: Request, res: Response) {
+  try {
+    const { usuarioId, juegoId } = req.body;
+
+    if (!usuarioId || !juegoId) {
+      return res.status(400).json({ message: "Faltan datos requeridos" });
+    }
+
+    const resultado = await carritoService.eliminarDelCarrito(usuarioId, juegoId);
+
+    res.status(200).json({
+      message: "Producto actualizado en el carrito",
+      data: resultado,
+    });
+  } catch (error: any) {
+    console.error("Error al eliminar del carrito:", error);
+    res.status(500).json({
+      message: "Error interno al eliminar del carrito",
+      error: error.message,
+    });
+  }
+}
 }
