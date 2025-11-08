@@ -16,4 +16,18 @@ export class GameRepository {
             where: { id : id }
         });
     }
+
+    async findSimilarGames(generos: string[], excludeId: number) {
+    return prisma.juego.findMany({
+        where: {
+            id: { not: excludeId },
+            juego_genero: {
+                some: { genero: { nombre: { in: generos } } }
+            }
+        },
+        include: { 
+            juego_genero: { include: { genero: true } }
+        },
+        take: 6
+    });}
 }

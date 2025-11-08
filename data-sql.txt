@@ -111,30 +111,27 @@ INSERT INTO genero (nombre) VALUES
 ('Simulación'),
 ('Puzzles');
 
+INSERT INTO juego_genero (juego_id, genero_id) VALUES
 -- Steam
-INSERT INTO juego_genero VALUES
 (1, 1), (1, 4),           -- Counter-Strike 2 → Acción, Shooter
-(2, 2), (2, 3);            -- Baldur’s Gate 3 → Aventura, RPG
+(2, 2), (2, 3),           -- Baldur’s Gate 3 → Aventura, RPG
 
 -- PlayStation 5
-INSERT INTO juego_genero VALUES
-(3, 1), (3, 2),            -- Spider-Man 2 → Acción, Aventura
-(4, 1), (4, 2);            -- God of War → Acción, Aventura
+(3, 1), (3, 2), (3, 8),   -- Spider-Man 2 → Acción, Aventura, Mundo Abierto
+(4, 1), (4, 2), (4, 3),   -- God of War Ragnarök → Acción, Aventura, RPG
 
 -- Xbox
-INSERT INTO juego_genero VALUES
-(5, 4), (5, 8),            -- Halo Infinite → Shooter, Mundo Abierto
-(6, 5), (6, 8);            -- Forza Horizon 5 → Carreras, Mundo Abierto
+(5, 1), (5, 4), (5, 8),   -- Halo Infinite → Acción, Shooter, Mundo Abierto
+(6, 5), (6, 8), (6, 1),   -- Forza Horizon 5 → Carreras, Mundo Abierto, Acción
 
 -- Switch
-INSERT INTO juego_genero VALUES
-(7, 2), (7, 8),            -- Zelda TOTK → Aventura, Mundo Abierto
-(8, 6), (8, 2);            -- Mario Odyssey → Plataformas, Aventura
+(7, 2), (7, 3), (7, 8),   -- Zelda TOTK → Aventura, RPG, Mundo Abierto
+(8, 6), (8, 2), (8, 1),   -- Super Mario Odyssey → Plataformas, Aventura, Acción
 
 -- Mobile
-INSERT INTO juego_genero VALUES
-(9, 10), (9, 2),           -- Monument Valley 2 → Puzzles, Aventura
-(10, 9), (10, 3);          -- Stardew Valley Mobile → Simulación, RPG
+(9, 10), (9, 2), (9, 7),  -- Monument Valley 2 → Puzzles, Aventura, Estrategia
+(10, 9), (10, 3), (10, 8);-- Stardew Valley Mobile → Simulación, RPG, Mundo Abierto
+
 
 INSERT INTO usuario_juego (usuario_id, juego_id, cantidad) VALUES
 (1, 2, 1),   -- Juan compró Baldur’s Gate 3
@@ -143,3 +140,34 @@ INSERT INTO usuario_juego (usuario_id, juego_id, cantidad) VALUES
 (2, 10, 2),  -- María compró 2 Stardew Valley Mobile
 (3, 1, 1),   -- Lucas compró Counter-Strike 2
 (3, 6, 1);   -- Lucas compró Forza Horizon 5
+
+
+UPDATE juego SET descripcion = 'Counter-Strike 2 es un shooter táctico competitivo desarrollado por Valve. Con el motor Source 2, ofrece físicas mejoradas, mapas rediseñados y un enfoque en la precisión y el trabajo en equipo. Es la evolución de la saga clásica, donde cada ronda cuenta.' 
+WHERE titulo = 'Counter-Strike 2';
+
+UPDATE juego SET descripcion = 'Baldur’s Gate 3 es un RPG de mundo abierto basado en Dungeons & Dragons. Desarrollado por Larian Studios, combina decisiones complejas, combates tácticos por turnos y una narrativa profunda. Cada elección afecta el destino de los personajes y del mundo.' 
+WHERE titulo = 'Baldur’s Gate 3';
+
+UPDATE juego SET descripcion = 'Marvel’s Spider-Man 2 continúa las aventuras de Peter Parker y Miles Morales en Nueva York. Alterna entre ambos héroes, enfrentando a Venom y otros villanos en una historia cinematográfica con un sistema de combate y desplazamiento mejorado.' 
+WHERE titulo = 'Marvel’s Spider-Man 2';
+
+UPDATE juego SET descripcion = 'God of War Ragnarök sigue el viaje de Kratos y Atreus mientras enfrentan el fin de los tiempos en la mitología nórdica. Con combates intensos, narrativa épica y paisajes impresionantes, combina acción brutal con un desarrollo emocional profundo.' 
+WHERE titulo = 'God of War Ragnarök';
+
+UPDATE juego SET descripcion = 'Halo Infinite lleva al Jefe Maestro a una nueva aventura en mundo abierto en el anillo Zeta Halo. Con libertad de exploración, enemigos variados y un enfoque en el combate estratégico, redefine la experiencia clásica de la saga Halo.' 
+WHERE titulo = 'Halo Infinite';
+
+UPDATE juego SET descripcion = 'Forza Horizon 5 invita a recorrer un México vibrante con cientos de autos en eventos dinámicos. Ofrece un mundo abierto detallado, clima cambiante y una sensación de libertad total para los fanáticos de la conducción.' 
+WHERE titulo = 'Forza Horizon 5';
+
+UPDATE juego SET descripcion = 'The Legend of Zelda: Tears of the Kingdom expande el universo de Breath of the Wild. Link explora el cielo y la superficie de Hyrule con nuevas habilidades de construcción, libertad total de exploración y una historia llena de misterio y emoción.' 
+WHERE titulo = 'The Legend of Zelda: Tears of the Kingdom';
+
+UPDATE juego SET descripcion = 'Super Mario Odyssey es una aventura 3D donde Mario recorre mundos coloridos junto a Cappy. Usa su gorra para tomar el control de enemigos y objetos, en una experiencia llena de creatividad, secretos y desafíos.' 
+WHERE titulo = 'Super Mario Odyssey';
+
+UPDATE juego SET descripcion = 'Monument Valley 2 combina arte visual y puzzles arquitectónicos imposibles. Con una ambientación poética y una banda sonora cautivadora, ofrece una experiencia introspectiva sobre la relación entre una madre y su hija en un mundo surrealista.' 
+WHERE titulo = 'Monument Valley 2';
+
+UPDATE juego SET descripcion = 'Stardew Valley Mobile permite crear una granja desde cero, pescar, combatir en minas y formar relaciones con los habitantes del pueblo. Su encanto pixel art y su profundidad lo convierten en uno de los simuladores más queridos.' 
+WHERE titulo = 'Stardew Valley Mobile';

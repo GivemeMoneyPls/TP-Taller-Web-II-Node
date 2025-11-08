@@ -47,4 +47,18 @@ export class GameController {
         }
 
     }
+
+    public getSimilarGames = async (req: Request, res: Response) => {
+    try {
+        const id = Number(req.params.id); 
+        const generos = (req.query.generos as string || "").split(',');
+        if (isNaN(id) || !generos.length) {
+            return res.status(400).json({message: "Parámetros inválidos"});
+        }
+        const games = await gameService.getSimilarGames(generos, id);
+        res.status(200).json(games);
+    } catch (error) {
+        res.status(500).json({message: "Error al obtener juegos similares", error});
+    }
+}
 }
