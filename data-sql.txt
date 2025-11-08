@@ -66,6 +66,35 @@ CREATE TABLE usuario_juego (
   FOREIGN KEY (juego_id) REFERENCES juego(id) ON DELETE CASCADE
 );
 
+-- ======================================================
+-- 7 TABLA PEDIDOS
+-- ======================================================
+
+CREATE TABLE pedido (
+  id INT(11) NOT NULL PRIMARY KEY,
+  usuario_id INT(11) NOT NULL,
+  fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  total DECIMAL(10,2) DEFAULT 0.00,
+FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
+
+-- ======================================================
+-- 8 TABLA INTERMEDIA: PEDIDO_JUEGO
+-- ======================================================
+
+CREATE TABLE pedido_juego (
+  pedido_id INT(11) NOT NULL,
+  juego_id INT(11) NOT NULL,
+  cantidad INT(11) DEFAULT 1,
+  precio_unitario DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (pedido_id, juego_id),
+  FOREIGN KEY (pedido_id) REFERENCES pedido(id),
+  FOREIGN KEY (juego_id) REFERENCES juego(id)
+);
+
+
+
 INSERT INTO usuario (email, contraseña, nombre, apellido, direccion) VALUES
 ('juan.perez@example.com', '1234', 'Juan', 'Pérez', 'Av. Siempre Viva 123'),
 ('maria.garcia@example.com', 'abcd', 'María', 'García', 'Calle Luna 456'),
