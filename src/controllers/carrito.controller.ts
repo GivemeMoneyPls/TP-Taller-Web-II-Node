@@ -73,4 +73,24 @@ export class CarritoController {
     });
   }
 }
+  async vaciarCarrito(req: Request, res: Response) {
+    try {
+      const { usuarioId } = req.params;
+
+      if (!usuarioId) {
+        return res.status(400).json({ message: "Falta el ID del usuario" });
+      }
+
+      await carritoService.vaciarCarrito(Number(usuarioId));
+
+      res.status(200).json({ message: "Carrito vaciado con éxito" });
+    } catch (error: any) {
+      console.error("Error al vaciar el carrito:", error);
+      res.status(500).json({
+        message: "Error interno al vaciar el carrito",
+        error: error.message,
+      });
+    }
+  }
+
 }

@@ -47,4 +47,10 @@ export class CarritoRepository {
     },
   });
 }
+  async clearCarrito(usuarioId: number) {
+    return await prisma.usuario_juego.deleteMany({
+      where: { usuario_id: usuarioId },
+    });
+  }
+
 }
