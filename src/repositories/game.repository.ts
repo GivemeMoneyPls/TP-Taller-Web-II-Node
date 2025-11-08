@@ -16,7 +16,6 @@ export class GameRepository {
         }
         
         const { precioMin, precioMax, plataformaId, generoIds } = filtros;
-        console.log("aa" + generoIds)
         
         // Objeto 'where' para la consulta de Prisma
         const where: any = {};

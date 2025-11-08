@@ -29,7 +29,6 @@ export class GameController {
             
             // 2. Llamar al servicio, pasando el objeto 'filtros' completo
             const games = await gameService.getGames(filtros); // ✅ El error debería desaparecer
-            console.log("bb"+filtros.generoIds)
             res.status(200).json(games);
             
         } catch (error) {
