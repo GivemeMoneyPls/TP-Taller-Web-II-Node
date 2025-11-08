@@ -126,7 +126,32 @@ INSERT INTO juego (titulo, fecha_lanzamiento, precio, descripcion, imagen_url, p
 
 -- Mobile
 ('Monument Valley 2', '2017-06-05', 4.99, 'Aventura visual con arquitectura imposible y paisajes sonoros.', 'monument_valley_2.jpg', 5),
-('Stardew Valley Mobile', '2019-03-13', 7.99, 'Simulador agrícola con exploración, combate y romance.', 'stardew_valley_mobile.jpg', 5);
+('Stardew Valley Mobile', '2019-03-13', 7.99, 'Simulador agrícola con exploración, combate y romance.', 'stardew_valley_mobile.jpg', 5),
+
+('Minecraft', '2011-11-18', 26.95, 'Minecraft es un juego de construcción y supervivencia en un mundo abierto de bloques. Los jugadores pueden explorar, recolectar recursos y construir estructuras infinitas, solos o con amigos.', 'minecraft.jpg', 1),
+('Hollow Knight', '2017-02-24', 14.99, 'Hollow Knight es un metroidvania con una atmósfera oscura, exploración profunda y combates desafiantes. Desarrollado por Team Cherry, se destaca por su arte dibujado a mano y su banda sonora inmersiva.', 'hollow_knight.jpg', 1),
+('Hello Neighbor', '2017-12-08', 29.99, 'Hello Neighbor es un juego de sigilo donde debes infiltrarte en la casa de tu misterioso vecino para descubrir sus secretos, mientras una IA aprende de tus movimientos.', 'hello_neighbor.jpg', 1),
+('Fortnite', '2017-07-25', 0.00, 'Fortnite es un juego de batalla campal gratuito desarrollado por Epic Games. Combina disparos, construcción y eventos en vivo en un universo en constante evolución.', 'fortnite.jpg', 3),
+('Undertale', '2015-09-15', 9.99, 'Undertale es un RPG donde puedes elegir no matar a tus enemigos. Con humor, personajes entrañables y una historia que rompe la cuarta pared, cada decisión importa.', 'undertale.jpg', 1),
+('Terraria', '2011-05-16', 9.99, 'Terraria combina exploración, construcción y combate en un mundo 2D generado proceduralmente. Con jefes, objetos y secretos infinitos, es un clásico del género sandbox.', 'terraria.jpg', 1),
+('Plants vs Zombies', '2009-05-05', 4.99, 'Plants vs Zombies es un juego de estrategia en tiempo real donde debes defender tu casa del ataque zombi usando plantas con poderes únicos.', 'plants_vs_zombies.jpg', 5),
+('Cuphead', '2017-09-29', 19.99, 'Cuphead es un run-and-gun inspirado en las caricaturas de los años 30. Con animación tradicional, combates difíciles y una estética única, es una obra maestra indie.', 'cuphead.jpg', 4),
+('Celeste', '2018-01-25', 19.99, 'Celeste es un juego de plataformas desafiante donde una joven debe escalar una montaña, enfrentando sus miedos. Destaca por su precisión, narrativa emocional y música.', 'celeste.jpg', 1),
+('Red Dead Redemption 2', '2018-10-26', 59.99, 'Red Dead Redemption 2 es un western de mundo abierto de Rockstar Games. Ofrece una historia cinematográfica, vastos paisajes y realismo sin precedentes.', 'red_dead_redemption_2.jpg', 3),
+('The Witcher 3: Wild Hunt', '2015-05-19', 39.99, 'The Witcher 3 es un RPG de mundo abierto donde Geralt de Rivia busca a su hija adoptiva en un mundo lleno de monstruos y decisiones morales. Con misiones profundas y gráficos impresionantes.', 'the_witcher_3.jpg', 1),
+('Overwatch 2', '2022-10-04', 3.00, 'Overwatch 2 es un shooter por equipos con héroes únicos. Combina acción rápida, estrategia y trabajo en equipo en partidas multijugador competitivas.', 'overwatch_2.jpg', 3),
+('Apex Legends', '2019-02-04', 2.00, 'Apex Legends es un battle royale gratuito con héroes, habilidades especiales y combates dinámicos en escuadrones. Desarrollado por Respawn Entertainment.', 'apex_legends.jpg', 1),
+('Resident Evil 4 Remake', '2023-03-24', 59.99, 'Remake del clásico survival horror de Capcom. Leon S. Kennedy debe rescatar a la hija del presidente enfrentando horrores en un remoto pueblo europeo.', 'resident_evil_4_remake.jpg', 2),
+('Cyberpunk 2077', '2020-12-10', 59.99, 'Cyberpunk 2077 es un RPG de mundo abierto ambientado en Night City. Ofrece una narrativa cinematográfica, personalización profunda y decisiones que alteran la historia.', 'cyberpunk_2077.jpg', 1),
+('Among Us', '2018-06-15', 4.99, 'Among Us es un juego multijugador de deducción social donde los jugadores deben descubrir al impostor dentro de la nave. Perfecto para jugar con amigos.', 'among_us.jpg', 5),
+('The Sims 4', '2014-09-02', 19.99, 'The Sims 4 permite crear y controlar personas en un mundo virtual. Diseña casas, forma relaciones y vive historias únicas.', 'the_sims_4.jpg', 1),
+('Genshin Impact', '2020-09-28', 5.00, 'Genshin Impact es un RPG de acción y aventura en mundo abierto con un sistema de combate elemental y exploración inspirada en Zelda.', 'genshin_impact.jpg', 5),
+('Valorant', '2020-06-02', 0.00, 'Valorant combina disparos tácticos y habilidades de héroes. Un shooter competitivo 5v5 desarrollado por Riot Games.', 'valorant.jpg', 1),
+('Dead Cells', '2018-08-07', 19.99, 'Dead Cells es un roguelike de acción y plataformas con combates fluidos y progresión basada en habilidad. Cada partida es distinta.', 'dead_cells.jpg', 4),
+('Hades', '2020-09-17', 24.99, 'Hades es un roguelike isométrico de Supergiant Games. Controla a Zagreus en su intento de escapar del inframundo, con una historia y jugabilidad brillantes.', 'hades.jpg', 1),
+('Fall Guys', '2020-08-04', 0.00, 'Fall Guys es un battle royale de plataformas donde 60 jugadores compiten en divertidas pruebas hasta que solo queda uno.', 'fall_guys.jpg', 4),
+('Assassin’s Creed Valhalla', '2020-11-10', 59.99, 'Juega como Eivor, un guerrero vikingo que conquista Inglaterra. Mundo abierto, exploración, combates y decisiones narrativas.', 'ac_valhalla.jpg', 3),
+('Alice madness returns', '2011-06-14', 39.99, 'Una joven llamada Alice Liddell que, tras el trauma de perder a su familia en un incendio, lucha contra sus demonios interiores explorando una versión retorcida del País de las Maravillas.', 'alice_madness_returns.jpg', 1); 
 
 INSERT INTO genero (nombre) VALUES
 ('Acción'),
@@ -159,7 +184,32 @@ INSERT INTO juego_genero (juego_id, genero_id) VALUES
 
 -- Mobile
 (9, 10), (9, 2), (9, 7),  -- Monument Valley 2 → Puzzles, Aventura, Estrategia
-(10, 9), (10, 3), (10, 8);-- Stardew Valley Mobile → Simulación, RPG, Mundo Abierto
+(10, 9), (10, 3), (10, 8), -- Stardew Valley Mobile → Simulación, RPG, Mundo Abierto
+
+(11, 8), (11, 9), (11, 1),     -- Minecraft → Mundo Abierto, Simulación, Acción
+(12, 6), (12, 2), (12, 1),     -- Hollow Knight → Plataformas, Aventura, Acción
+(13, 7), (13, 2), (13, 10),    -- Hello Neighbor → Estrategia, Aventura, Puzzles
+(14, 1), (14, 4), (14, 8),     -- Fortnite → Acción, Shooter, Mundo Abierto
+(15, 3), (15, 2), (15, 10),    -- Undertale → RPG, Aventura, Puzzles
+(16, 8), (16, 1), (16, 9),     -- Terraria → Mundo Abierto, Acción, Simulación
+(17, 7), (17, 10), (17, 9),    -- Plants vs Zombies → Estrategia, Puzzles, Simulación
+(18, 6), (18, 1), (18, 10),    -- Cuphead → Plataformas, Acción, Puzzles
+(19, 6), (19, 2), (19, 10),    -- Celeste → Plataformas, Aventura, Puzzles
+(20, 1), (20, 2), (20, 8),     -- Red Dead Redemption 2 → Acción, Aventura, Mundo Abierto
+(21, 3), (21, 2), (21, 8),     -- The Witcher 3 → RPG, Aventura, Mundo Abierto
+(22, 4), (22, 1), (22, 7),     -- Overwatch 2 → Shooter, Acción, Estrategia
+(23, 4), (23, 1), (23, 8),     -- Apex Legends → Shooter, Acción, Mundo Abierto
+(24, 1), (24, 2), (24, 10),    -- Resident Evil 4 Remake → Acción, Aventura, Puzzles
+(25, 3), (25, 8), (25, 1),     -- Cyberpunk 2077 → RPG, Mundo Abierto, Acción
+(26, 7), (26, 9), (26, 10),    -- Among Us → Estrategia, Simulación, Puzzles
+(27, 9), (27, 8), (27, 2),     -- The Sims 4 → Simulación, Mundo Abierto, Aventura
+(28, 3), (28, 8), (28, 2),     -- Genshin Impact → RPG, Mundo Abierto, Aventura
+(29, 4), (29, 1), (29, 7),     -- Valorant → Shooter, Acción, Estrategia
+(30, 6), (30, 1), (30, 3),     -- Dead Cells → Plataformas, Acción, RPG
+(31, 3), (31, 1), (31, 2),     -- Hades → RPG, Acción, Aventura
+(32, 6), (32, 7), (32, 9),     -- Fall Guys → Plataformas, Estrategia, Simulación
+(33, 1), (33, 2), (33, 8),     -- Assassin’s Creed Valhalla → Acción, Aventura, Mundo Abierto
+(34, 1), (34, 2), (34, 10);    -- Alice madness returns → Accion, Aventura, Puzzles
 
 
 INSERT INTO usuario_juego (usuario_id, juego_id, cantidad) VALUES
