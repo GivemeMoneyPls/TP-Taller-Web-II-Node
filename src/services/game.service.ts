@@ -1,13 +1,19 @@
 import { GameRepository } from "../repositories/game.repository.js";
 
+interface FiltrosJuego {
+    precioMin?: number;
+    precioMax?: number;
+    plataformaId?: number;
+    generoIds?: number[];
+}
+
 export class GameService {
 
     constructor(private gameRepository:GameRepository) {}
 
-    async getGames() {
+    async getGames(filtros?: FiltrosJuego) { 
         
-    return await this.gameRepository.findAllGames();
-
+        return await this.gameRepository.getGames(filtros || {}); 
     }
 
     async getGameById(id: number) {
@@ -15,5 +21,6 @@ export class GameService {
         return await this.gameRepository.findGameById(id);
 
     }
+
 
 }
