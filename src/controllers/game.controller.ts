@@ -11,17 +11,30 @@ export class GameController {
     constructor() {}
 
     public getGames = async(req:Request, res:Response) => {
-
         try {
+            const { precioMin, precioMax, plataformaId, generoIds } = req.query;
 
-            const games = await gameService.getGames();
-
+            const filtros = {
+                // Si el valor no existe o es nulo, se asigna 'undefined' explícitamente.
+                precioMin: precioMin ? parseFloat(precioMin as string) : undefined,
+                precioMax: precioMax ? parseFloat(precioMax as string) : undefined,
+                plataformaId: plataformaId ? parseInt(plataformaId as string, 10) : undefined,
+                
+                generoIds: generoIds
+                    ? (Array.isArray(generoIds)
+                        ? generoIds.map(id => parseInt(id as string, 10))
+                        : [parseInt(generoIds as string, 10)])
+                    : undefined,
+            };
+            
+            // 2. Llamar al servicio, pasando el objeto 'filtros' completo
+            const games = await gameService.getGames(filtros); // ✅ El error debería desaparecer
             res.status(200).json(games);
             
         } catch (error) {
+            console.error(error); // Mejorar el log
             res.status(500).json({message: "Error al obtener los juegos", error});
         }
-
     }
 
      public getGame = async(req:Request, res:Response) => {
