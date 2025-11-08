@@ -24,6 +24,7 @@ model juego {
   plataforma        plataforma?     @relation(fields: [plataforma_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "juego_ibfk_1")
   juego_genero      juego_genero[]
   usuario_juego     usuario_juego[]
+  pedido_juego pedido_juego[]
 
   @@index([plataforma_id], map: "plataforma_id")
 }
@@ -52,6 +53,7 @@ model usuario {
   apellido      String          @db.VarChar(50)
   direccion     String?         @db.VarChar(100)
   usuario_juego usuario_juego[]
+  pedidos  pedido[]
 }
 
 model usuario_juego {
@@ -63,4 +65,23 @@ model usuario_juego {
 
   @@id([usuario_id, juego_id])
   @@index([juego_id], map: "juego_id")
+}
+
+model pedido {
+  id           Int           @id @default(autoincrement())
+  usuario_id   Int
+  fecha        DateTime      @default(now())
+  total        Float         @default(0)
+  usuario      usuario       @relation(fields: [usuario_id], references: [id])
+  pedido_juego pedido_juego[]
+}
+
+model pedido_juego {
+  pedido_id      Int
+  juego_id       Int
+  cantidad       Int     @default(1)
+  precio_unitario Float
+  pedido         pedido  @relation(fields: [pedido_id], references: [id])
+  juego          juego   @relation(fields: [juego_id], references: [id])  // relación con opposite en juego.pedido_juego
+  @@id([pedido_id, juego_id])
 }
