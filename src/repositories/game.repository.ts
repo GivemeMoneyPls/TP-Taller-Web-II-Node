@@ -102,6 +102,7 @@ export class GameRepository {
               descripcion: juegoAActualizar.descripcion,
               imagen_url: juegoAActualizar.imagen_url,
               plataforma_id: juegoAActualizar.plataforma_id,
+              fecha_lanzamiento: juegoAActualizar.fecha_lanzamiento,
               juego_genero: {
                 deleteMany: {},
                 create: juegoAActualizar.generos.map((genId) => ({
