@@ -1,3 +1,4 @@
+import type { GameDTO } from "../models/game.model.js";
 import { prisma } from "../prisma.js";
 
 interface FiltrosJuego {
@@ -91,6 +92,29 @@ export class GameRepository {
   return juegosOrdenados;
 }
 
+    async updateGame(id: number, juegoAActualizar:GameDTO) {
+
+        return await prisma.juego.update({
+            where: { id: id },
+            data: {
+              titulo: juegoAActualizar.titulo,
+              precio: juegoAActualizar.precio,
+              descripcion: juegoAActualizar.descripcion,
+              imagen_url: juegoAActualizar.imagen_url,
+              plataforma_id: juegoAActualizar.plataforma_id,
+              fecha_lanzamiento: juegoAActualizar.fecha_lanzamiento,
+              juego_genero: {
+                deleteMany: {},
+                create: juegoAActualizar.generos.map((genId) => ({
+                  genero: {
+                    connect: { id: genId }
+                  }
+                }))
+              }
+            
+        }
+});
+}
 
     async findAllGames() {
         return await prisma.juego.findMany({
@@ -98,5 +122,4 @@ export class GameRepository {
                 juego_genero: { include: { genero: true } } }
         });
     }
-
 }
