@@ -20,15 +20,19 @@ export class CarritoService {
   async eliminarDelCarrito(usuarioId: number, juegoId: number) {
   const existente = await carritoRepository.findItem(usuarioId, juegoId);
 
-  if (!existente) {
-    throw new Error("El producto no está en el carrito");
+    if (!existente) {
+      throw new Error("El producto no está en el carrito");
+    }
+
+    if (existente.cantidad > 1) {
+      const nuevaCantidad = existente.cantidad - 1;
+      return await carritoRepository.updateCantidad(usuarioId, juegoId, nuevaCantidad);
+    } else {
+      return await carritoRepository.deleteItem(usuarioId, juegoId);
+    }
+}
+  async vaciarCarrito(usuarioId: number) {
+    return await carritoRepository.clearCarrito(usuarioId);
   }
 
-  if (existente.cantidad > 1) {
-    const nuevaCantidad = existente.cantidad - 1;
-    return await carritoRepository.updateCantidad(usuarioId, juegoId, nuevaCantidad);
-  } else {
-    return await carritoRepository.deleteItem(usuarioId, juegoId);
-  }
-}
 }
