@@ -64,9 +64,8 @@ export class UserService {
           process.env.JWT_SECRET, 
           { expiresIn: '8h' } 
         );
- 
-        const { contrase_a, ...userData } = user;
-        return { token, user: userData };
+
+        return { token };
       
       } catch (error) {
         console.error("Error al firmar el token:", error);
