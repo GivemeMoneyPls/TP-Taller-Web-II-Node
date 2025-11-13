@@ -14,6 +14,14 @@ class PedidoService {
 
         return pedidos;
     }
+
+     async finalizarCompra(usuarioId: number, juegos: { juegoId: number; cantidad: number }[]) {
+    const pedido = await pedidoRepository.createPedido(usuarioId, juegos);
+    return pedido;
+  }
+
 }
+
+
 
 export const pedidoService = new PedidoService();
