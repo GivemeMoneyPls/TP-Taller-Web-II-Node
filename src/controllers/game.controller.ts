@@ -98,4 +98,19 @@ public updateGame = async(req:Request, res:Response) => {
 
     }
 
+    public createGame = async(req:Request, res:Response) => {
+
+      const juegoACrear:GameDTO = req.body;
+
+        try {
+            const gameCreated = await gameService.createGame(juegoACrear);
+
+            res.status(200).json(gameCreated);
+            
+        } catch (error) {
+            res.status(500).json({message: "No se pudo crear el juego", error});
+        }
+
+    }
+
 }

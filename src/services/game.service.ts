@@ -33,4 +33,10 @@ export class GameService {
 
     }
 
+    async createGame(juegoACrear:GameDTO) {
+        
+    return await this.gameRepository.createGame(juegoACrear);
+
+    }
+
 }
