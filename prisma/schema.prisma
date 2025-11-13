@@ -52,6 +52,7 @@ model usuario {
   nombre        String          @db.VarChar(50)
   apellido      String          @db.VarChar(50)
   direccion     String?         @db.VarChar(100)
+  admin         Boolean?        @default(false)
   pedidos       pedido[]
   usuario_juego usuario_juego[]
 }
