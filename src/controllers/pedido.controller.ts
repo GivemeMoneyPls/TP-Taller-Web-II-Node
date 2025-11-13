@@ -21,4 +21,20 @@ const getMisCompras = async (req: Request, res: Response) => {
     }
 };
 
-export { getMisCompras };
+const finalizarCompra = async (req: Request, res: Response) => {
+  const { usuarioId, juegos } = req.body;
+
+  if (!usuarioId || !Array.isArray(juegos) || juegos.length === 0) {
+    return res.status(400).json({ message: 'Datos inválidos para finalizar la compra.' });
+  }
+
+  try {
+    const pedido = await pedidoService.finalizarCompra(usuarioId, juegos);
+    res.status(201).json(pedido);
+  } catch (error) {
+    console.error('Error al finalizar la compra:', error);
+    res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+};
+
+export { getMisCompras, finalizarCompra };
