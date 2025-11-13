@@ -5,7 +5,6 @@ export interface AuthRequest extends Request {
     user?: any;
 }
 
-// 1. VERIFICAR TOKEN
 export const verifyToken = (req: AuthRequest, res: Response, next: NextFunction) => {
     const token = req.header('Authorization');
 
