@@ -5,6 +5,7 @@ import plataformaRouter from "./plataforma-router/plataforma.routes.js";
 import generoRouter from "./genero-router/genero-routes.js";
 import carritoRoutes from './carrito-router/carrito.routes.js';
 import pedidoRoutes from './pedido-router/pedido.routes.js';
+import uploadRoutes from "./upload-router/upload-routes.js";
 
 
 export class AppRoutes {
@@ -19,6 +20,7 @@ export class AppRoutes {
         router.use('/api/genero', generoRouter);
         router.use('/api/carrito', carritoRoutes);
         router.use('/api/pedidos', pedidoRoutes);
+        router.use('/api/upload', uploadRoutes);
 
         return router;
     }
