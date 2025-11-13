@@ -10,7 +10,8 @@ CREATE TABLE usuario (
   contraseña VARCHAR(255) NOT NULL,
   nombre VARCHAR(50) NOT NULL,
   apellido VARCHAR(50) NOT NULL,
-  direccion VARCHAR(100)
+  direccion VARCHAR(100),
+  admin boolean default false
 );
 
 -- ======================================================
@@ -93,13 +94,6 @@ CREATE TABLE pedido_juego (
   FOREIGN KEY (juego_id) REFERENCES juego(id)
 );
 
-
-
-INSERT INTO usuario (email, contraseña, nombre, apellido, direccion) VALUES
-('juan.perez@example.com', '1234', 'Juan', 'Pérez', 'Av. Siempre Viva 123'),
-('maria.garcia@example.com', 'abcd', 'María', 'García', 'Calle Luna 456'),
-('lucas.fernandez@example.com', 'pass123', 'Lucas', 'Fernández', 'Ruta Sol 789');
-
 INSERT INTO plataforma (nombre) VALUES
 ('Steam'),
 ('PlayStation 5'),
@@ -108,50 +102,41 @@ INSERT INTO plataforma (nombre) VALUES
 ('Mobile');
 
 INSERT INTO juego (titulo, fecha_lanzamiento, precio, descripcion, imagen_url, plataforma_id) VALUES
--- Steam
-('Counter-Strike 2', '2023-09-27', 19.99, 'Shooter táctico competitivo con gráficos y físicas renovadas.', 'counter_strike_2.jpg', 1),
-('Baldur’s Gate 3', '2023-08-03', 69.99, 'RPG épico basado en Dungeons & Dragons con elecciones complejas.', 'baldurs_gate_3.jpg', 1),
+('Counter-Strike 2', '2023-09-27', 19.99, 'Counter-Strike 2 es un shooter táctico competitivo desarrollado por Valve. Con el motor Source 2, ofrece físicas mejoradas, mapas rediseñados y un enfoque en la precisión y el trabajo en equipo. Es la evolución de la saga clásica, donde cada ronda cuenta.', '/uploads/counter_strike_2.jpg', 1),
+('Baldur’s Gate 3', '2023-08-03', 69.99, 'Baldur’s Gate 3 es un RPG de mundo abierto basado en Dungeons & Dragons. Desarrollado por Larian Studios, combina decisiones complejas, combates tácticos por turnos y una narrativa profunda. Cada elección afecta el destino de los personajes y del mundo.', '/uploads/baldurs_gate_3.jpg', 1),
+('Marvel’s Spider-Man 2', '2023-10-20', 69.99, 'Marvel’s Spider-Man 2 continúa las aventuras de Peter Parker y Miles Morales en Nueva York. Alterna entre ambos héroes, enfrentando a Venom y otros villanos en una historia cinematográfica con un sistema de combate y desplazamiento mejorado.', '/uploads/marvels_spider_man_2.jpg', 2),
+('God of War Ragnarök', '2022-11-09', 69.99, 'God of War Ragnarök sigue el viaje de Kratos y Atreus mientras enfrentan el fin de los tiempos en la mitología nórdica. Con combates intensos, narrativa épica y paisajes impresionantes, combina acción brutal con un desarrollo emocional profundo.', '/uploads/god_of_war_ragnarok.jpg', 2),
+('Halo Infinite', '2021-12-08', 59.99, 'Halo Infinite lleva al Jefe Maestro a una nueva aventura en mundo abierto en el anillo Zeta Halo. Con libertad de exploración, enemigos variados y un enfoque en el combate estratégico, redefine la experiencia clásica de la saga Halo.', '/uploads/halo_infinite.jpg', 3),
+('Forza Horizon 5', '2021-11-09', 59.99, 'Forza Horizon 5 invita a recorrer un México vibrante con cientos de autos en eventos dinámicos. Ofrece un mundo abierto detallado, clima cambiante y una sensación de libertad total para los fanáticos de la conducción.', '/uploads/forza_horizon_5.jpg', 3),
+('The Legend of Zelda: Tears of the Kingdom', '2023-05-12', 69.99, 'The Legend of Zelda: Tears of the Kingdom expande el universo de Breath of the Wild. Link explora el cielo y la superficie de Hyrule con nuevas habilidades de construcción, libertad total de exploración y una historia llena de misterio y emoción.', '/uploads/the_legend_of_zelda_tears_of_the_kingdom.jpg', 4),
+('Super Mario Odyssey', '2017-10-27', 59.99, 'Super Mario Odyssey es una aventura 3D donde Mario recorre mundos coloridos junto a Cappy. Usa su gorra para tomar el control de enemigos y objetos, en una experiencia llena de creatividad, secretos y desafíos.', '/uploads/super_mario_odyssey.jpg', 4),
+('Monument Valley 2', '2017-06-05', 4.99, 'Monument Valley 2 combina arte visual y puzzles arquitectónicos imposibles. Con una ambientación poética y una banda sonora cautivadora, ofrece una experiencia introspectiva sobre la relación entre una madre y su hija en un mundo surrealista.', '/uploads/monument_valley_2.jpg', 5),
+('Stardew Valley Mobile', '2019-03-13', 7.99, 'Stardew Valley Mobile permite crear una granja desde cero, pescar, combatir en minas y formar relaciones con los habitantes del pueblo. Su encanto pixel art y su profundidad lo convierten en uno de los simuladores más queridos.', '/uploads/stardew_valley_mobile.jpg', 5),
+('Minecraft', '2011-11-18', 26.95, 'Minecraft es un juego de construcción y supervivencia en un mundo abierto de bloques. Los jugadores pueden explorar, recolectar recursos y construir estructuras infinitas, solos o con amigos.', '/uploads/minecraft.jpg', 1),
+('Hollow Knight', '2017-02-24', 14.99, 'Hollow Knight es un metroidvania con una atmósfera oscura, exploración profunda y combates desafiantes. Desarrollado por Team Cherry, se destaca por su arte dibujado a mano y su banda sonora inmersiva.', '/uploads/hollow_knight.jpg', 1),
+('Hello Neighbor', '2017-12-08', 29.99, 'Hello Neighbor es un juego de sigilo donde debes infiltrarte en la casa de tu misterioso vecino para descubrir sus secretos, mientras una IA aprende de tus movimientos.', '/uploads/hello_neighbor.jpg', 1),
+('Fortnite', '2017-07-25', 0.00, 'Fortnite es un juego de batalla campal gratuito desarrollado por Epic Games. Combina disparos, construcción y eventos en vivo en un universo en constante evolución.', '/uploads/fortnite.jpg', 3),
+('Undertale', '2015-09-15', 9.99, 'Undertale es un RPG donde puedes elegir no matar a tus enemigos. Con humor, personajes entrañables y una historia que rompe la cuarta pared, cada decisión importa.', '/uploads/undertale.jpg', 1),
+('Terraria', '2011-05-16', 9.99, 'Terraria combina exploración, construcción y combate en un mundo 2D generado proceduralmente. Con jefes, objetos y secretos infinitos, es un clásico del género sandbox.', '/uploads/terraria.jpg', 1),
+('Plants vs Zombies', '2009-05-05', 4.99, 'Plants vs Zombies es un juego de estrategia en tiempo real donde debes defender tu casa del ataque zombi usando plantas con poderes únicos.', '/uploads/plants_vs_zombies.jpg', 5),
+('Cuphead', '2017-09-29', 19.99, 'Cuphead es un run-and-gun inspirado en las caricaturas de los años 30. Con animación tradicional, combates difíciles y una estética única, es una obra maestra indie.', '/uploads/cuphead.jpg', 4),
+('Celeste', '2018-01-25', 19.99, 'Celeste es un juego de plataformas desafiante donde una joven debe escalar una montaña, enfrentando sus miedos. Destaca por su precisión, narrativa emocional y música.', '/uploads/celeste.jpg', 1),
+('Red Dead Redemption 2', '2018-10-26', 59.99, 'Red Dead Redemption 2 es un western de mundo abierto de Rockstar Games. Ofrece una historia cinematográfica, vastos paisajes y realismo sin precedentes.', '/uploads/red_dead_redemption_2.jpg', 3),
+('The Witcher 3: Wild Hunt', '2015-05-19', 39.99, 'The Witcher 3 es un RPG de mundo abierto donde Geralt de Rivia busca a su hija adoptiva en un mundo lleno de monstruos y decisiones morales. Con misiones profundas y gráficos impresionantes.', '/uploads/the_witcher_3.jpg', 1),
+('Overwatch 2', '2022-10-04', 3.00, 'Overwatch 2 es un shooter por equipos con héroes únicos. Combina acción rápida, estrategia y trabajo en equipo en partidas multijugador competitivas.', '/uploads/overwatch_2.jpg', 3),
+('Apex Legends', '2019-02-04', 2.00, 'Apex Legends es un battle royale gratuito con héroes, habilidades especiales y combates dinámicos en escuadrones. Desarrollado por Respawn Entertainment.', '/uploads/apex_legends.jpg', 1),
+('Resident Evil 4 Remake', '2023-03-24', 59.99, 'Remake del clásico survival horror de Capcom. Leon S. Kennedy debe rescatar a la hija del presidente enfrentando horrores en un remoto pueblo europeo.', '/uploads/resident_evil_4_remake.jpg', 2),
+('Cyberpunk 2077', '2020-12-10', 59.99, 'Cyberpunk 2077 es un RPG de mundo abierto ambientado en Night City. Ofrece una narrativa cinematográfica, personalización profunda y decisiones que alteran la historia.', '/uploads/cyberpunk_2077.jpg', 1),
+('Among Us', '2018-06-15', 4.99, 'Among Us es un juego multijugador de deducción social donde los jugadores deben descubrir al impostor dentro de la nave. Perfecto para jugar con amigos.', '/uploads/among_us.jpg', 5),
+('The Sims 4', '2014-09-02', 19.99, 'The Sims 4 permite crear y controlar personas en un mundo virtual. Diseña casas, forma relaciones y vive historias únicas.', '/uploads/the_sims_4.jpg', 1),
+('Genshin Impact', '2020-09-28', 5.00, 'Genshin Impact es un RPG de acción y aventura en mundo abierto con un sistema de combate elemental y exploración inspirada en Zelda.', '/uploads/genshin_impact.jpg', 5),
+('Valorant', '2020-06-02', 0.00, 'Valorant combina disparos tácticos y habilidades de héroes. Un shooter competitivo 5v5 desarrollado por Riot Games.', '/uploads/valorant.jpg', 1),
+('Dead Cells', '2018-08-07', 19.99, 'Dead Cells es un roguelike de acción y plataformas con combates fluidos y progresión basada en habilidad. Cada partida es distinta.', '/uploads/dead_cells.jpg', 4),
+('Hades', '2020-09-17', 24.99, 'Hades es un roguelike isométrico de Supergiant Games. Controla a Zagreus en su intento de escapar del inframundo, con una historia y jugabilidad brillantes.', '/uploads/hades.jpg', 1),
+('Fall Guys', '2020-08-04', 0.00, 'Fall Guys es un battle royale de plataformas donde 60 jugadores compiten en divertidas pruebas hasta que solo queda uno.', '/uploads/fall_guys.jpg', 4),
+('Assassin’s Creed Valhalla', '2020-11-10', 59.99, 'Juega como Eivor, un guerrero vikingo que conquista Inglaterra. Mundo abierto, exploración, combates y decisiones narrativas.', '/uploads/ac_valhalla.jpg', 3),
+('Alice madness returns', '2011-06-14', 39.99, 'Una joven llamada Alice Liddell que, tras el trauma de perder a su familia en un incendio, lucha contra sus demonios interiores explorando una versión retorcida del País de las Maravillas.', '/uploads/alice_madness_returns.jpg', 1);
 
--- PlayStation 5
-('Marvel’s Spider-Man 2', '2023-10-20', 69.99, 'Peter Parker y Miles Morales en una nueva aventura exclusiva.', 'marvels_spider_man_2.jpg', 2),
-('God of War Ragnarök', '2022-11-09', 69.99, 'Kratos y Atreus enfrentan el fin de los tiempos nórdicos.', 'god_of_war_ragnarok.jpg', 2),
-
--- Xbox Series X
-('Halo Infinite', '2021-12-08', 59.99, 'Nueva aventura del Jefe Maestro en mundo abierto.', 'halo_infinite.jpg', 3),
-('Forza Horizon 5', '2021-11-09', 59.99, 'Conduce por México en un espectacular entorno de mundo abierto.', 'forza_horizon_5.jpg', 3),
-
--- Nintendo Switch
-('The Legend of Zelda: Tears of the Kingdom', '2023-05-12', 69.99, 'Secuela de Breath of the Wild con nuevas mecánicas.', 'the_legend_of_zelda_tears_of_the_kingdom.jpg', 4),
-('Super Mario Odyssey', '2017-10-27', 59.99, 'Mario explora coloridos mundos 3D llenos de sorpresas.', 'super_mario_odyssey.jpg', 4),
-
--- Mobile
-('Monument Valley 2', '2017-06-05', 4.99, 'Aventura visual con arquitectura imposible y paisajes sonoros.', 'monument_valley_2.jpg', 5),
-('Stardew Valley Mobile', '2019-03-13', 7.99, 'Simulador agrícola con exploración, combate y romance.', 'stardew_valley_mobile.jpg', 5),
-
-('Minecraft', '2011-11-18', 26.95, 'Minecraft es un juego de construcción y supervivencia en un mundo abierto de bloques. Los jugadores pueden explorar, recolectar recursos y construir estructuras infinitas, solos o con amigos.', 'minecraft.jpg', 1),
-('Hollow Knight', '2017-02-24', 14.99, 'Hollow Knight es un metroidvania con una atmósfera oscura, exploración profunda y combates desafiantes. Desarrollado por Team Cherry, se destaca por su arte dibujado a mano y su banda sonora inmersiva.', 'hollow_knight.jpg', 1),
-('Hello Neighbor', '2017-12-08', 29.99, 'Hello Neighbor es un juego de sigilo donde debes infiltrarte en la casa de tu misterioso vecino para descubrir sus secretos, mientras una IA aprende de tus movimientos.', 'hello_neighbor.jpg', 1),
-('Fortnite', '2017-07-25', 0.00, 'Fortnite es un juego de batalla campal gratuito desarrollado por Epic Games. Combina disparos, construcción y eventos en vivo en un universo en constante evolución.', 'fortnite.jpg', 3),
-('Undertale', '2015-09-15', 9.99, 'Undertale es un RPG donde puedes elegir no matar a tus enemigos. Con humor, personajes entrañables y una historia que rompe la cuarta pared, cada decisión importa.', 'undertale.jpg', 1),
-('Terraria', '2011-05-16', 9.99, 'Terraria combina exploración, construcción y combate en un mundo 2D generado proceduralmente. Con jefes, objetos y secretos infinitos, es un clásico del género sandbox.', 'terraria.jpg', 1),
-('Plants vs Zombies', '2009-05-05', 4.99, 'Plants vs Zombies es un juego de estrategia en tiempo real donde debes defender tu casa del ataque zombi usando plantas con poderes únicos.', 'plants_vs_zombies.jpg', 5),
-('Cuphead', '2017-09-29', 19.99, 'Cuphead es un run-and-gun inspirado en las caricaturas de los años 30. Con animación tradicional, combates difíciles y una estética única, es una obra maestra indie.', 'cuphead.jpg', 4),
-('Celeste', '2018-01-25', 19.99, 'Celeste es un juego de plataformas desafiante donde una joven debe escalar una montaña, enfrentando sus miedos. Destaca por su precisión, narrativa emocional y música.', 'celeste.jpg', 1),
-('Red Dead Redemption 2', '2018-10-26', 59.99, 'Red Dead Redemption 2 es un western de mundo abierto de Rockstar Games. Ofrece una historia cinematográfica, vastos paisajes y realismo sin precedentes.', 'red_dead_redemption_2.jpg', 3),
-('The Witcher 3: Wild Hunt', '2015-05-19', 39.99, 'The Witcher 3 es un RPG de mundo abierto donde Geralt de Rivia busca a su hija adoptiva en un mundo lleno de monstruos y decisiones morales. Con misiones profundas y gráficos impresionantes.', 'the_witcher_3.jpg', 1),
-('Overwatch 2', '2022-10-04', 3.00, 'Overwatch 2 es un shooter por equipos con héroes únicos. Combina acción rápida, estrategia y trabajo en equipo en partidas multijugador competitivas.', 'overwatch_2.jpg', 3),
-('Apex Legends', '2019-02-04', 2.00, 'Apex Legends es un battle royale gratuito con héroes, habilidades especiales y combates dinámicos en escuadrones. Desarrollado por Respawn Entertainment.', 'apex_legends.jpg', 1),
-('Resident Evil 4 Remake', '2023-03-24', 59.99, 'Remake del clásico survival horror de Capcom. Leon S. Kennedy debe rescatar a la hija del presidente enfrentando horrores en un remoto pueblo europeo.', 'resident_evil_4_remake.jpg', 2),
-('Cyberpunk 2077', '2020-12-10', 59.99, 'Cyberpunk 2077 es un RPG de mundo abierto ambientado en Night City. Ofrece una narrativa cinematográfica, personalización profunda y decisiones que alteran la historia.', 'cyberpunk_2077.jpg', 1),
-('Among Us', '2018-06-15', 4.99, 'Among Us es un juego multijugador de deducción social donde los jugadores deben descubrir al impostor dentro de la nave. Perfecto para jugar con amigos.', 'among_us.jpg', 5),
-('The Sims 4', '2014-09-02', 19.99, 'The Sims 4 permite crear y controlar personas en un mundo virtual. Diseña casas, forma relaciones y vive historias únicas.', 'the_sims_4.jpg', 1),
-('Genshin Impact', '2020-09-28', 5.00, 'Genshin Impact es un RPG de acción y aventura en mundo abierto con un sistema de combate elemental y exploración inspirada en Zelda.', 'genshin_impact.jpg', 5),
-('Valorant', '2020-06-02', 0.00, 'Valorant combina disparos tácticos y habilidades de héroes. Un shooter competitivo 5v5 desarrollado por Riot Games.', 'valorant.jpg', 1),
-('Dead Cells', '2018-08-07', 19.99, 'Dead Cells es un roguelike de acción y plataformas con combates fluidos y progresión basada en habilidad. Cada partida es distinta.', 'dead_cells.jpg', 4),
-('Hades', '2020-09-17', 24.99, 'Hades es un roguelike isométrico de Supergiant Games. Controla a Zagreus en su intento de escapar del inframundo, con una historia y jugabilidad brillantes.', 'hades.jpg', 1),
-('Fall Guys', '2020-08-04', 0.00, 'Fall Guys es un battle royale de plataformas donde 60 jugadores compiten en divertidas pruebas hasta que solo queda uno.', 'fall_guys.jpg', 4),
-('Assassin’s Creed Valhalla', '2020-11-10', 59.99, 'Juega como Eivor, un guerrero vikingo que conquista Inglaterra. Mundo abierto, exploración, combates y decisiones narrativas.', 'ac_valhalla.jpg', 3),
-('Alice madness returns', '2011-06-14', 39.99, 'Una joven llamada Alice Liddell que, tras el trauma de perder a su familia en un incendio, lucha contra sus demonios interiores explorando una versión retorcida del País de las Maravillas.', 'alice_madness_returns.jpg', 1); 
 
 INSERT INTO genero (nombre) VALUES
 ('Acción'),
@@ -166,26 +151,17 @@ INSERT INTO genero (nombre) VALUES
 ('Puzzles');
 
 INSERT INTO juego_genero (juego_id, genero_id) VALUES
--- Steam
+
 (1, 1), (1, 4),           -- Counter-Strike 2 → Acción, Shooter
 (2, 2), (2, 3),           -- Baldur’s Gate 3 → Aventura, RPG
-
--- PlayStation 5
 (3, 1), (3, 2), (3, 8),   -- Spider-Man 2 → Acción, Aventura, Mundo Abierto
 (4, 1), (4, 2), (4, 3),   -- God of War Ragnarök → Acción, Aventura, RPG
-
--- Xbox
 (5, 1), (5, 4), (5, 8),   -- Halo Infinite → Acción, Shooter, Mundo Abierto
 (6, 5), (6, 8), (6, 1),   -- Forza Horizon 5 → Carreras, Mundo Abierto, Acción
-
--- Switch
 (7, 2), (7, 3), (7, 8),   -- Zelda TOTK → Aventura, RPG, Mundo Abierto
 (8, 6), (8, 2), (8, 1),   -- Super Mario Odyssey → Plataformas, Aventura, Acción
-
--- Mobile
 (9, 10), (9, 2), (9, 7),  -- Monument Valley 2 → Puzzles, Aventura, Estrategia
 (10, 9), (10, 3), (10, 8), -- Stardew Valley Mobile → Simulación, RPG, Mundo Abierto
-
 (11, 8), (11, 9), (11, 1),     -- Minecraft → Mundo Abierto, Simulación, Acción
 (12, 6), (12, 2), (12, 1),     -- Hollow Knight → Plataformas, Aventura, Acción
 (13, 7), (13, 2), (13, 10),    -- Hello Neighbor → Estrategia, Aventura, Puzzles
@@ -210,43 +186,3 @@ INSERT INTO juego_genero (juego_id, genero_id) VALUES
 (32, 6), (32, 7), (32, 9),     -- Fall Guys → Plataformas, Estrategia, Simulación
 (33, 1), (33, 2), (33, 8),     -- Assassin’s Creed Valhalla → Acción, Aventura, Mundo Abierto
 (34, 1), (34, 2), (34, 10);    -- Alice madness returns → Accion, Aventura, Puzzles
-
-
-INSERT INTO usuario_juego (usuario_id, juego_id, cantidad) VALUES
-(1, 2, 1),   -- Juan compró Baldur’s Gate 3
-(1, 7, 1),   -- Juan compró Zelda TOTK
-(2, 4, 1),   -- María compró God of War Ragnarök
-(2, 10, 2),  -- María compró 2 Stardew Valley Mobile
-(3, 1, 1),   -- Lucas compró Counter-Strike 2
-(3, 6, 1);   -- Lucas compró Forza Horizon 5
-
-
-UPDATE juego SET descripcion = 'Counter-Strike 2 es un shooter táctico competitivo desarrollado por Valve. Con el motor Source 2, ofrece físicas mejoradas, mapas rediseñados y un enfoque en la precisión y el trabajo en equipo. Es la evolución de la saga clásica, donde cada ronda cuenta.' 
-WHERE titulo = 'Counter-Strike 2';
-
-UPDATE juego SET descripcion = 'Baldur’s Gate 3 es un RPG de mundo abierto basado en Dungeons & Dragons. Desarrollado por Larian Studios, combina decisiones complejas, combates tácticos por turnos y una narrativa profunda. Cada elección afecta el destino de los personajes y del mundo.' 
-WHERE titulo = 'Baldur’s Gate 3';
-
-UPDATE juego SET descripcion = 'Marvel’s Spider-Man 2 continúa las aventuras de Peter Parker y Miles Morales en Nueva York. Alterna entre ambos héroes, enfrentando a Venom y otros villanos en una historia cinematográfica con un sistema de combate y desplazamiento mejorado.' 
-WHERE titulo = 'Marvel’s Spider-Man 2';
-
-UPDATE juego SET descripcion = 'God of War Ragnarök sigue el viaje de Kratos y Atreus mientras enfrentan el fin de los tiempos en la mitología nórdica. Con combates intensos, narrativa épica y paisajes impresionantes, combina acción brutal con un desarrollo emocional profundo.' 
-WHERE titulo = 'God of War Ragnarök';
-
-UPDATE juego SET descripcion = 'Halo Infinite lleva al Jefe Maestro a una nueva aventura en mundo abierto en el anillo Zeta Halo. Con libertad de exploración, enemigos variados y un enfoque en el combate estratégico, redefine la experiencia clásica de la saga Halo.' 
-WHERE titulo = 'Halo Infinite';
-
-UPDATE juego SET descripcion = 'Forza Horizon 5 invita a recorrer un México vibrante con cientos de autos en eventos dinámicos. Ofrece un mundo abierto detallado, clima cambiante y una sensación de libertad total para los fanáticos de la conducción.' 
-WHERE titulo = 'Forza Horizon 5';
-
-UPDATE juego SET descripcion = 'The Legend of Zelda: Tears of the Kingdom expande el universo de Breath of the Wild. Link explora el cielo y la superficie de Hyrule con nuevas habilidades de construcción, libertad total de exploración y una historia llena de misterio y emoción.' 
-WHERE titulo = 'The Legend of Zelda: Tears of the Kingdom';
-
-UPDATE juego SET descripcion = 'Super Mario Odyssey es una aventura 3D donde Mario recorre mundos coloridos junto a Cappy. Usa su gorra para tomar el control de enemigos y objetos, en una experiencia llena de creatividad, secretos y desafíos.' 
-WHERE titulo = 'Super Mario Odyssey';
-
-UPDATE juego SET descripcion = 'Monument Valley 2 combina arte visual y puzzles arquitectónicos imposibles. Con una ambientación poética y una banda sonora cautivadora, ofrece una experiencia introspectiva sobre la relación entre una madre y su hija en un mundo surrealista.' 
-WHERE titulo = 'Monument Valley 2';
-
-UPDATE juego SET descripcion = 'Stardew Valley Mobile permite crear una granja desde cero, pescar, combatir en minas y formar relaciones con los habitantes del pueblo. Su encanto pixel art y su profundidad lo convierten en uno de los simuladores más queridos.' 
-WHERE titulo = 'Stardew Valley Mobile';
