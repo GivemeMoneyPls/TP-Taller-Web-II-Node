@@ -6,5 +6,6 @@ const userController = new UserController();
 
 authRouter.post('/signup', userController.signup);
 authRouter.post('/signin', userController.signin);
+authRouter.put('/update', userController.updateProfile);
 
 export default authRouter;

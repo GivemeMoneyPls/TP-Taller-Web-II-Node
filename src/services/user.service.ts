@@ -56,7 +56,9 @@ export class UserService {
         const payload = { 
           id: user.id, 
           email: user.email,
-          nombre: user.nombre
+          nombre: user.nombre,
+          apellido: user.apellido,
+          direccion: user.direccion
         };
       
         const token = jwt.sign(
@@ -64,13 +66,71 @@ export class UserService {
           process.env.JWT_SECRET, 
           { expiresIn: '8h' } 
         );
- 
-        const { contrase_a, ...userData } = user;
-        return { token, user: userData };
+
+        return { token };
       
       } catch (error) {
         console.error("Error al firmar el token:", error);
         throw new Error('Error interno al generar la sesión');
       }
   }
+
+  async updateUser(userData : any) {
+
+    const currentUser = await userRepository.findUserById(userData.id); 
+
+    if (!currentUser) {
+        throw new Error('Usuario no encontrado');
+    }
+  
+      const dataToUpdate: any = {
+      nombre: userData.nombre,
+      apellido: userData.apellido,
+      direccion: userData.direccion
+    };
+ 
+    if (userData.newPassword && userData.newPassword.trim() !== '') {
+
+      if (!userData.currentPassword) {
+        throw new Error('Para cambiar la contraseña, debes ingresar tu contraseña actual.');
+      }
+
+      const isPasswordCorrect = await bcrypt.compare(userData.currentPassword, currentUser.contrase_a);
+      if (!isPasswordCorrect) {
+        throw new Error('La contraseña actual es incorrecta.');
+      }
+
+      if (userData.newPassword.length < 8) {
+        throw new Error('La nueva contraseña debe tener al menos 8 caracteres');
+      }
+
+      const isSamePassword = await bcrypt.compare(userData.newPassword, currentUser.contrase_a);
+      if (isSamePassword) {
+        throw new Error('La nueva contraseña no puede ser igual a la actual.');
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(userData.newPassword, salt);
+      dataToUpdate.contrase_a = hashedPassword;
+    }
+
+    const updatedUser = await userRepository.updateUser(userData.id, dataToUpdate);
+
+    if (!process.env.JWT_SECRET) {
+      throw new Error('JWT_SECRET no definido');
+    }
+
+    const payload = {
+      id: updatedUser.id,
+      email: updatedUser.email, 
+      nombre: updatedUser.nombre,
+      apellido: updatedUser.apellido,
+      direccion: updatedUser.direccion
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '8h' });
+
+    return { token };
+  }
+
 }

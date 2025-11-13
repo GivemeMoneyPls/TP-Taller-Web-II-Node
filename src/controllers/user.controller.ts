@@ -21,15 +21,36 @@ export class UserController {
   }
 
   async signin(req: Request, res: Response) {
-  try {
-    const loginData = req.body;
+    try {
+      const loginData = req.body;
 
-    const loginResult = await userService.loginUser(loginData);
+      const loginResult = await userService.loginUser(loginData);
 
-    res.status(200).json(loginResult); 
+      res.status(200).json(loginResult); 
 
-  } catch (error: any) {
-    res.status(401).json({ message: "Credenciales inválidas", error: error.message });
+    } catch (error: any) {
+      res.status(401).json({ message: "Credenciales inválidas", error: error.message });
+    }
   }
-}
+
+  async updateProfile(req: Request, res: Response) {
+    try {
+      const userData = req.body;
+
+      if (!userData.id) {
+        return res.status(400).json({ message: "Falta el ID del usuario" });
+      }
+
+      const result = await userService.updateUser(userData);
+
+      res.status(200).json(result);
+
+    } catch (error: any) {
+      console.error("Error en updateProfile:", error);
+      res.status(500).json({ 
+        message: "Error al actualizar el perfil", 
+        error: error.message 
+      });
+    }
+  } 
 }
