@@ -58,7 +58,8 @@ export class UserService {
           email: user.email,
           nombre: user.nombre,
           apellido: user.apellido,
-          direccion: user.direccion
+          direccion: user.direccion,
+          admin: user.admin
         };
       
         const token = jwt.sign(
@@ -125,7 +126,8 @@ export class UserService {
       email: updatedUser.email, 
       nombre: updatedUser.nombre,
       apellido: updatedUser.apellido,
-      direccion: updatedUser.direccion
+      direccion: updatedUser.direccion,
+      admin: updatedUser.admin
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '8h' });
