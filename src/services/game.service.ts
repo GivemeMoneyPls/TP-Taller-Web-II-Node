@@ -39,4 +39,8 @@ export class GameService {
 
     }
 
+    async deleteGame(id: number) {
+        return await this.gameRepository.deleteGame(id);
+    }   
+
 }
