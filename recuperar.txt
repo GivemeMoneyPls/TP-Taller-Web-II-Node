@@ -1,2 +1,13 @@
-Token de recuperación para el usuario nicole@quaranta.com:
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDkxNDQ4LCJleHAiOjE3NjMwOTIzNDh9.xH4hmCVdS24jUS1eZzMiW9AMUAK_Mw15rTRe4tfoTfY
+
+    =============================================
+      RECUPERACIÓN DE CONTRASEÑA - GAME STORE
+    =============================================
+    Usuario: Nicolas (nico@caba.com)
+    
+    Copie el siguiente TOKEN para restaurar su clave:
+    
+    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMTM5MjcyLCJleHAiOjE3NjMxNDAxNzJ9.oHxdYsDGLB-7oX9zbFVl4QE1CC1uSOLuXeogYiZ8OwE
+    
+    =============================================
+    (Este token expira en 15 minutos)
+    

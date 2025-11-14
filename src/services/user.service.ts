@@ -137,9 +137,6 @@ export class UserService {
     return { token };
   }
 
-   // ==============================================
-  //      RECUPERAR PASSWORD -> GENERA TOKEN
-  // ==============================================
   async recuperarPassword(correo: string) {
 
     const user = await userRepository.findUserByEmail(correo);
@@ -149,40 +146,41 @@ export class UserService {
       throw new Error("JWT_SECRET no está definido");
     }
 
-    // Token válido por 15 minutos
     const token = jwt.sign(
       { id: user.id },
       process.env.JWT_SECRET,
       { expiresIn: "15m" }
     );
 
-    // Ruta del archivo recuperar.txt
+    const mensaje = `
+    =============================================
+      RECUPERACIÓN DE CONTRASEÑA - GAME STORE
+    =============================================
+    Usuario: ${user.nombre} (${user.email})
+    
+    Copie el siguiente TOKEN para restaurar su clave:
+    
+    ${token}
+    
+    =============================================
+    (Este token expira en 15 minutos)
+    `;
+
     const filePath = path.resolve("recuperar.txt");
 
-    // Guardar el token en el archivo
-    fs.writeFileSync(
-      filePath,
-      `Token de recuperación para el usuario ${user.email}:\n${token}`
-    );
+    fs.writeFileSync(filePath, mensaje);
 
     console.log("Token guardado en recuperar.txt");
 
     return true;
   }
 
-
-
-
-  // ==============================================
-  //      CONFIRMAR NUEVA CONTRASEÑA
-  // ==============================================
   async confirmarNuevaContrasena(token: string, nuevaContrasena: string) {
 
     if (!process.env.JWT_SECRET) {
       throw new Error("JWT_SECRET no está definido");
     }
 
-    // Validar token
     let payload: any;
     try {
       payload = jwt.verify(token, process.env.JWT_SECRET);
@@ -190,7 +188,6 @@ export class UserService {
       throw new Error("El token es inválido o expiró");
     }
 
-    // Validar nueva contraseña
     if (nuevaContrasena.length < 8) {
       throw new Error("La contraseña debe tener al menos 8 caracteres");
     }
@@ -198,11 +195,9 @@ export class UserService {
     const user = await userRepository.findUserById(payload.id);
     if (!user) throw new Error("Usuario no encontrado");
 
-    // Encriptar nueva contraseña
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(nuevaContrasena, salt);
 
-    // Guardar
     await userRepository.updateUser(payload.id, { contrase_a: hashedPassword });
 
     return true;

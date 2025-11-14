@@ -54,9 +54,7 @@ export class UserController {
       });
     }
   } 
- // ------------------------------
-  //       RECUPERAR PASSWORD
-  // ------------------------------
+  
   async recuperarPassword(req: Request, res: Response) {
     try {
       const { email } = req.body;
@@ -76,10 +74,6 @@ export class UserController {
     }
   }
 
-
-  // ------------------------------
-  //      CONFIRMAR NUEVA PASS
-  // ------------------------------
   async confirmarNuevaContrasena(req: Request, res: Response) {
     try {
       const { token, nuevaContrasena } = req.body;
