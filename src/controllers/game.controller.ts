@@ -105,7 +105,7 @@ public updateGame = async(req:Request, res:Response) => {
         try {
             const gameCreated = await gameService.createGame(juegoACrear);
 
-            res.status(200).json(gameCreated);
+            res.status(201).json(gameCreated);
             
         } catch (error) {
             res.status(500).json({message: "No se pudo crear el juego", error});
