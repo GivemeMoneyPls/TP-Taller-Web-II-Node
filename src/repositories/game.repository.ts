@@ -144,4 +144,11 @@ async createGame(juegoACrear:GameDTO) {
                 juego_genero: { include: { genero: true } } }
         });
     }
+
+
+    async deleteGame(id: number) {
+        return await prisma.juego.delete({
+            where: { id: id }
+        });
+    }
 }
