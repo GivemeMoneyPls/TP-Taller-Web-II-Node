@@ -8,5 +8,7 @@ const userController = new UserController();
 authRouter.post('/signup', userController.signup);
 authRouter.post('/signin', userController.signin);
 authRouter.put('/update', verifyToken, userController.updateProfile);
+authRouter.post('/recuperar', userController.recuperarPassword);
+authRouter.post('/confirmar', userController.confirmarNuevaContrasena);
 
 export default authRouter;

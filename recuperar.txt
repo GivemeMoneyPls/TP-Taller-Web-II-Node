@@ -1,0 +1,2 @@
+Token de recuperación para el usuario nicole@quaranta.com:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYzMDkxNDQ4LCJleHAiOjE3NjMwOTIzNDh9.xH4hmCVdS24jUS1eZzMiW9AMUAK_Mw15rTRe4tfoTfY
