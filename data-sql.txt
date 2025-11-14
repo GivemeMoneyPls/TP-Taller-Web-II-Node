@@ -72,7 +72,7 @@ CREATE TABLE usuario_juego (
 -- ======================================================
 
 CREATE TABLE pedido (
-  id INT(11) NOT NULL PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   usuario_id INT(11) NOT NULL,
   fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   total DECIMAL(10,2) DEFAULT 0.00,
