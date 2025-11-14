@@ -116,6 +116,28 @@ export class GameRepository {
 });
 }
 
+async createGame(juegoACrear:GameDTO) {
+
+        return await prisma.juego.create({
+            data: {
+              titulo: juegoACrear.titulo,
+              precio: juegoACrear.precio,
+              descripcion: juegoACrear.descripcion,
+              imagen_url: juegoACrear.imagen_url,
+              plataforma_id: juegoACrear.plataforma_id,
+              fecha_lanzamiento: juegoACrear.fecha_lanzamiento,
+              juego_genero: {
+                create: juegoACrear.generos.map((genId) => ({
+                  genero: {
+                    connect: { id: genId }
+                  }
+                }))
+              }
+            
+        }
+});
+}
+
     async findAllGames() {
         return await prisma.juego.findMany({
             include: { plataforma: true, 
