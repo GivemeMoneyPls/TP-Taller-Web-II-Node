@@ -113,4 +113,16 @@ public updateGame = async(req:Request, res:Response) => {
 
     }
 
+    public deleteGame = async(req:Request, res:Response) => {
+        try {
+            const id = Number(req.params.id);
+            if (isNaN(id)) {
+                return res.status(400).json({ message: "ID invalido" });
+            }
+            await gameService.deleteGame(id);
+            res.status(200).json({ message: "Juego eliminado correctamente" });
+        } catch (error) {
+            res.status(500).json({ message: "No se pudo eliminar el juego", error });
+        }
+    }
 }
